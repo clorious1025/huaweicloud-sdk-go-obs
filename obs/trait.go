@@ -19,6 +19,7 @@ import (
 	"io"
 	"net/url"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -777,6 +778,7 @@ func (input UploadPartInput) trans(isObs bool) (params map[string]string, header
 	if input.ContentMD5 != "" {
 		headers[HEADER_MD5_CAMEL] = []string{input.ContentMD5}
 	}
+	headers[HEADER_CONTENT_LENGTH_CAMEL] = []string{strconv.FormatInt(input.PartSize,10)}
 	if input.Body != nil {
 		data = input.Body
 	}
